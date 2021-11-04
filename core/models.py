@@ -49,7 +49,7 @@ class Comment(models.Model):
 
     Author = models.ForeignKey(User, on_delete=models.CASCADE)
     Article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    Body = models.TextField()
+    Body = QuillField()
     PublishedDate = models.DateTimeField(default=timezone.now)
     LastEditDate = models.DateTimeField(auto_now=True)
 

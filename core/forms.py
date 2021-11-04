@@ -2,7 +2,7 @@ from typing import Hashable
 from django import forms
 from django_quill.forms import QuillFormField
 
-from core.models import Article, User
+from core.models import Article, Comment, User
 
 class RegisterForm(forms.ModelForm):
     Password = forms.CharField(widget=forms.PasswordInput, max_length=64, required=True)
@@ -18,3 +18,8 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = ["Title", "Body"]
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["Body"]

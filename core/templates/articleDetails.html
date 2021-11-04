@@ -5,14 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ Article.Title|title }} | Blog App</title>
+    {{ CommentForm.media }}
 </head>
 <body>
     <div>
         <h1>{{ Article.Title | title }}</h1>
         <b>{{ Article.ReadTime | date:"i" }} minutes to read</b>
-        <p>{{ Article.Body.html | safe }}</p>
+        <div>
+            <p>{{ Article.Body.html | safe }}</p>
+        </div>
         <div>
         <h2>Comments</h2>
+        <form action="/api/addComment" method="post">{% csrf_token %}
+            {{ CommentForm }}
+            <button type="submit">Submit</button>
+        </form>
         </div>
     </div>
 </body>

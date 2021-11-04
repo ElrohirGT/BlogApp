@@ -2,7 +2,7 @@ from django import forms
 from django.http.response import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
-from .forms import ArticleForm, RegisterForm, LogInUserForm
+from .forms import ArticleForm, CommentForm, RegisterForm, LogInUserForm
 from .models import Article, User
 import os
 import hashlib
@@ -125,4 +125,6 @@ def article(request):
         return HttpResponseRedirect("/")
     
     article = Article.objects.get(pk=articleId)
-    return render(request, "articleDetails.html", {"Article":article})
+    isLoggedIn = request.session.__contains__("UserName")
+    form = CommentForm()
+    return render(request, "articleDetails.html", {"Article":article, "IsLoggedIn": isLoggedIn, "CommentForm":form})
