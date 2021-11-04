@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog App</title>
+    <title>Article Editor | Blog App</title>
+    {{ form.media }}
 </head>
 <body>
-    <h1>Welcome</h1>
-    <h2>Please register or <a href="/login">Log In</a> </h2>
-    <form action="." method="POST">
-        {% csrf_token %}
+    <form action="." method="POST">{% csrf_token %}
+        <h1>Article Editor</h1>
         {{ form }}
-        <button type="submit">Register</button>
+        <button type="submit">Submit</button>
     </form>
 </body>
 </html>

@@ -3,6 +3,7 @@ from django.db.models.base import Model
 from django.db.models.fields import CharField
 from django.db.models.fields.related import ForeignKey
 from django.db.models.fields.reverse_related import ManyToOneRel
+from django_quill.fields import QuillField
 from django.urls import reverse
 from django.utils import timezone
 
@@ -29,7 +30,7 @@ class Article(models.Model):
 
     Author = models.ForeignKey(User, on_delete=models.CASCADE)
     Title = models.CharField(max_length=50)
-    Body = models.TextField()
+    Body = QuillField()
     ReadTime = models.TimeField(auto_now=False, auto_now_add=False)
     PublishedDate = models.DateTimeField(auto_now_add=True)
 

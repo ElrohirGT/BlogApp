@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Blog App</title>
+</head>
+<body>
+    <h1>Welcome to the dashboard {{ UserName }}</h1>
+    <a href="/articleEditor">Create Article</a>
+    <h2>Your blogs</h2>
+    {% for article in UserArticles %}
+        <div>
+            <a href="/articles?articleId={{article.pk}}">
+                <b>{{ article.Title|title }}</b>
+                <span>{{ article.ReadTime|date:"i" }} minutes</span>
+            </a>
+        </div>
+    {% endfor %}
+</body>
+</html>

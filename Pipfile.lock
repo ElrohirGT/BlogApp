@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b890b2061eb6fc1d8bf94ed78d77990ac519683b06b3819184b0effc5cedbd47"
+            "sha256": "726bb7f83fbde60288e7cd3124a1a5347520bc7623c1d01415cbcaa495663d42"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -31,6 +31,14 @@
             ],
             "index": "pypi",
             "version": "==3.2.9"
+        },
+        "django-quill-editor": {
+            "hashes": [
+                "sha256:7bccad82f6b830634c073013f464f8de5e3b8d414692905d1a123195054d791b",
+                "sha256:b1c051a059351db4138d956e33a78b4e0f8a48213ca7257689ba7ce178cbec91"
+            ],
+            "index": "pypi",
+            "version": "==0.1.22"
         },
         "djangorestframework": {
             "hashes": [
