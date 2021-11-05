@@ -9,7 +9,7 @@ import hashlib
 import datetime
 
 ENCRIPTING_ITERATIONS = 10**6 #Minimum recommended is 100,000
-ONE_CHARACTER_READING_TIME = 0.01 #seconds per char
+wordReadingSpeed = 275 #words per minute
 
 def EncryptPassword(password, passwordSalt = os.urandom(32)):
     return (hashlib.pbkdf2_hmac(
@@ -100,12 +100,13 @@ def article_editor(request):
             SendErrors(request, form.errors)
             return HttpResponseRedirect(request.path)
         article = form.save(commit=False)
-        numberOfCharacters = 0
+        wordCount = 0
         for line in article.Body.html:
-            numberOfCharacters += len(line)
-        article.ReadTime = datetime.time(0, 0, int(numberOfCharacters * ONE_CHARACTER_READING_TIME))
+            wordCount += len(line.split())
+        article.ReadTime = datetime.time(0, int(wordCount / wordReadingSpeed), 0)
         article.Author = User.objects.get(pk=userId)
         article.save()
+        return HttpResponseRedirect("/dashboard")
         
 
     article = Article()
