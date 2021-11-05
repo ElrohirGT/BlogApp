@@ -8,6 +8,11 @@
 </head>
 <body>
     <h1>Welcome</h1>
-    <h2>Please <a href="/register">Register</a> or <a href="/login">Log In</a> </h2>
+    <h2>Please register or <a href="/login">Log In</a> </h2>
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Register</button>
+    </form>
 </body>
 </html>
