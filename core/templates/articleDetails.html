@@ -16,10 +16,35 @@
         </div>
         <div>
         <h2>Comments</h2>
-        <form action="/api/addComment" method="post">{% csrf_token %}
-            {{ CommentForm }}
+        <form method="post">{% csrf_token %}
+            {% for hiddenField in CommentForm.hidden_fields %}
+                {{ hiddenField }}
+            {% endfor %}
+            {% for field in CommentForm.visible_fields %}
+                {{ field }}
+            {% endfor %}
             <button type="submit">Submit</button>
+
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                    {{ message }}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </form>
+
+        {% for comment in Comments %}
+            <div>
+                <h3>{{ comment.Author.Name }}</h3>
+                <b>{{ comment.PublishedDate }}</b>
+                {% if comment.PublishedDate.date != comment.LastEditDate.date %} - Last Edit: {{ comment.LastEditDate }} {% endif %}
+                <div>{{ comment.Body.html | safe }}</div>
+            </div>
+        {% endfor %}
         </div>
     </div>
 </body>

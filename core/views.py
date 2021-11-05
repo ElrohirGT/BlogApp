@@ -3,7 +3,7 @@ from django.http.response import HttpResponse, HttpResponseBadRequest, HttpRespo
 from django.shortcuts import render
 from django.contrib import messages
 from .forms import ArticleForm, CommentForm, RegisterForm, LogInUserForm
-from .models import Article, User
+from .models import Article, Comment, User
 import os
 import hashlib
 import datetime
@@ -18,9 +18,9 @@ def EncryptPassword(password, passwordSalt = os.urandom(32)):
         passwordSalt,
         ENCRIPTING_ITERATIONS), passwordSalt)
 
-def SendErrors(errors):
+def SendErrors(request, errors):
     for error in errors:
-        messages.error(error)
+        messages.error(request, error)
 
 # Create your views here.
 def register_user(request):
@@ -97,14 +97,14 @@ def article_editor(request):
     if request.method == "POST":
         form = ArticleForm(request.POST)
         if not form.is_valid():
-            SendErrors(form.errors)
+            SendErrors(request, form.errors)
             return HttpResponseRedirect(request.path)
         article = form.save(commit=False)
         numberOfCharacters = 0
         for line in article.Body.html:
             numberOfCharacters += len(line)
         article.ReadTime = datetime.time(0, 0, int(numberOfCharacters * ONE_CHARACTER_READING_TIME))
-        article.Author_id = userId
+        article.Author = User.objects.get(pk=userId)
         article.save()
         
 
@@ -117,14 +117,24 @@ def article_editor(request):
     form = ArticleForm(instance=article)
     return render(request, "articleEditor.html", {"form":form})
 
-def article(request):
-    if not request.method == "GET" or not request.GET.__contains__("articleId"):
-        return HttpResponseRedirect("/")
-    articleId = request.GET["articleId"]
+def article_details(request, articleId):
     if not Article.objects.filter(pk=articleId).exists():
         return HttpResponseRedirect("/")
+
+    if request.method=="POST" and request.session.__contains__("UserName"):
+        form = CommentForm(request.POST)
+        if not form.is_valid():
+            SendErrors(request, form.errors)
+            return HttpResponseRedirect(request.path)
+        comment = form.save(commit=False)
+        comment.Author_id = request.session["UserId"]
+        comment.Article_id = articleId
+        comment.save()
     
-    article = Article.objects.get(pk=articleId)
-    isLoggedIn = request.session.__contains__("UserName")
-    form = CommentForm()
-    return render(request, "articleDetails.html", {"Article":article, "IsLoggedIn": isLoggedIn, "CommentForm":form})
+    context = {
+        "Article": Article.objects.get(pk=articleId),
+        "IsLoggedIn": request.session.__contains__("UserName"),
+        "CommentForm": CommentForm(),
+        "Comments": list(Comment.objects.filter(Article__pk=articleId))
+    }
+    return render(request, "articleDetails.html", context)

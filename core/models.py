@@ -21,10 +21,7 @@ class User(models.Model):
         verbose_name_plural = "users"
 
     def __str__(self):
-        return f"[{self.JoinedSince}] {self.Name}: {self.Email}"
-
-    def get_absolute_url(self):
-        return reverse("user_detail", kwargs={"pk": self.pk})
+        return f"{self.Name} : {self.Email}"
 
 class Article(models.Model):
 
@@ -40,10 +37,7 @@ class Article(models.Model):
         ordering = ['PublishedDate']
 
     def __str__(self):
-        return f"[{self.PublishedDate}] {self.Author}: {self.Title}"
-
-    def get_absolute_url(self):
-        return reverse("article_detail", kwargs={"pk": self.pk})
+        return f"[{self.Author.Name}] {self.Title}"
 
 class Comment(models.Model):
 
@@ -59,7 +53,4 @@ class Comment(models.Model):
         ordering = ['PublishedDate']
 
     def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse("comment_detail", kwargs={"pk": self.pk})
+        return f"[{self.PublishedDate}] {self.Author}"

@@ -12,7 +12,7 @@
     <h2>Your blogs</h2>
     {% for article in UserArticles %}
         <div>
-            <a href="/articles?articleId={{article.pk}}">
+            <a href="/article/{{article.pk}}">
                 <b>{{ article.Title|title }}</b>
                 <span>{{ article.ReadTime|date:"i" }} minutes</span>
             </a>

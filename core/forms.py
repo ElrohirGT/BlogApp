@@ -1,5 +1,6 @@
 from typing import Hashable
 from django import forms
+from django.forms.widgets import HiddenInput
 from django_quill.forms import QuillFormField
 
 from core.models import Article, Comment, User
