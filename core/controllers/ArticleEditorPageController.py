@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from core.controllers.PackageMethods import SendErrors
@@ -6,10 +6,8 @@ from core.controllers.PackageMethods import SendErrors
 from core.forms import ArticleForm
 from core.models import Article, User
 
+WORD_READING_SPEED = 300 #words per minute
 class ArticleEditorPageController():
-
-    WORD_READING_SPEED = 275 #words per minute
-
     def GetResponse(request):
         if not request.session.__contains__("UserName"):
             return HttpResponseRedirect("/login")
@@ -25,7 +23,7 @@ class ArticleEditorPageController():
             wordCount = 0
             for line in article.Body.html:
                 wordCount += len(line.split())
-            article.ReadTime = datetime.time(0, int(wordCount / ArticleEditorPageController.WORD_READING_SPEED), 0)
+            article.ReadTime = datetime.time(0, int(wordCount / WORD_READING_SPEED), 0)
             article.Author = User.objects.get(pk=userId)
             article.save()
             return HttpResponseRedirect("/dashboard")

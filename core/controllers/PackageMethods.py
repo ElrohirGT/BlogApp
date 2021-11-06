@@ -4,6 +4,9 @@ from django.contrib import messages
 
 ENCRIPTING_ITERATIONS = 10**6 #Minimum recommended is 100,000
 
+#123abc %K&cd
+# %K&cd 
+
 def EncryptPassword(password, passwordSalt = os.urandom(32)):
     return (hashlib.pbkdf2_hmac(
         "sha256",

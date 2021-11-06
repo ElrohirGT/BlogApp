@@ -3,6 +3,7 @@ from django.http.response import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
 from core.controllers.RegisterUserPageController import RegisterUserPageController
 
+from core.controllers.PackageMethods import EncryptPassword
 from core.forms import LogInUserForm
 from core.models import User
 
@@ -10,7 +11,7 @@ class LogInPageController():
     def GetResponse(request):
         if request.session.__contains__("UserName"):
             return HttpResponseRedirect("/dashboard")
-        elif request.method=="GET":
+        if request.method=="GET":
             form = LogInUserForm()
             return render(request, "login.html", {"form":form})
         elif request.method=="POST":
@@ -27,7 +28,7 @@ class LogInPageController():
                 return HttpResponseRedirect(request.path)
 
             user = matchingUsers[0]
-            (password, _) = RegisterUserPageController.EncryptPassword(form.cleaned_data["Password"], user.Salt)
+            (password, _) = EncryptPassword(form.cleaned_data["Password"], user.Salt)
             if user.Password != password:
                 messages.error(request, "The username or password were incorrect!")
                 return HttpResponseRedirect(request.path)
