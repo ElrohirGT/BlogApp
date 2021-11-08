@@ -17,3 +17,6 @@ def EncryptPassword(password, passwordSalt = os.urandom(32)):
 def SendErrors(request, errors):
     for error in errors:
         messages.error(request, error)
+
+def CheckSession(request)->bool:
+    return request.session.__contains__("UserName")

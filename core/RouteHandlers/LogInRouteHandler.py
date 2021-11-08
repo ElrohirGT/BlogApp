@@ -2,13 +2,13 @@ from django.contrib import messages
 from django.http.response import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
 
-from core.RouteHandlers.PackageMethods import EncryptPassword
+from core.RouteHandlers.PackageMethods import CheckSession, EncryptPassword
 from core.forms import LogInUserForm
 from core.models import User
 
 class LogInRouteHandler():
     def GetResponse(request):
-        if request.session.__contains__("UserName"):
+        if CheckSession(request):
             return HttpResponseRedirect("/dashboard")
         if request.method=="GET":
             form = LogInUserForm()

@@ -1,7 +1,7 @@
 import datetime
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
-from core.RouteHandlers.PackageMethods import SendErrors
+from core.RouteHandlers.PackageMethods import CheckSession, SendErrors
 
 from core.forms import ArticleForm
 from core.models import Article, User
@@ -9,7 +9,7 @@ from core.models import Article, User
 WORD_READING_SPEED = 300 #words per minute
 class ArticleEditorRouteHandler():
     def GetResponse(request):
-        if not request.session.__contains__("UserName"):
+        if not CheckSession(request):
             return HttpResponseRedirect("/login")
         
         userId = request.session["UserId"]

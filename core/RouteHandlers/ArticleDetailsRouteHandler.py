@@ -1,6 +1,6 @@
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
-from core.RouteHandlers.PackageMethods import SendErrors
+from core.RouteHandlers.PackageMethods import CheckSession, SendErrors
 
 from core.forms import CommentForm
 from core.models import Article, Comment
@@ -10,7 +10,8 @@ class ArticleDetailsRouteHandler():
         if not Article.objects.filter(pk=articleId).exists():
             return HttpResponseRedirect("/")
 
-        if request.method=="POST" and request.session.__contains__("UserName"):
+        isLoggedIn = CheckSession(request)
+        if request.method=="POST" and isLoggedIn:
             form = CommentForm(request.POST)
             if not form.is_valid():
                 SendErrors(request, form.errors)
@@ -22,7 +23,7 @@ class ArticleDetailsRouteHandler():
         
         context = {
             "Article": Article.objects.get(pk=articleId),
-            "IsLoggedIn": request.session.__contains__("UserName"),
+            "IsLoggedIn": isLoggedIn,
             "CommentForm": CommentForm(),
             "Comments": list(Comment.objects.filter(Article__pk=articleId))
         }
