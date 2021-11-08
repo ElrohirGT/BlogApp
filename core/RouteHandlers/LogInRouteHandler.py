@@ -1,13 +1,12 @@
 from django.contrib import messages
 from django.http.response import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
-from core.controllers.RegisterUserPageController import RegisterUserPageController
 
-from core.controllers.PackageMethods import EncryptPassword
+from core.RouteHandlers.PackageMethods import EncryptPassword
 from core.forms import LogInUserForm
 from core.models import User
 
-class LogInPageController():
+class LogInRouteHandler():
     def GetResponse(request):
         if request.session.__contains__("UserName"):
             return HttpResponseRedirect("/dashboard")

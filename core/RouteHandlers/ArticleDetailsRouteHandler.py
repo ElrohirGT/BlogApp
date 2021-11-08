@@ -1,11 +1,11 @@
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
-from core.controllers.PackageMethods import SendErrors
+from core.RouteHandlers.PackageMethods import SendErrors
 
 from core.forms import CommentForm
 from core.models import Article, Comment
 
-class ArticleDetailsPageController():
+class ArticleDetailsRouteHandler():
     def GetResponse(request, articleId):
         if not Article.objects.filter(pk=articleId).exists():
             return HttpResponseRedirect("/")

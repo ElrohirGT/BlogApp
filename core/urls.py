@@ -1,17 +1,17 @@
 from django.urls import path
-from core.controllers.ArticleDetailsPageController import ArticleDetailsPageController
-from core.controllers.ArticleEditorPageController import ArticleEditorPageController
 
-from core.controllers.IndexPageController import IndexPageController
-from core.controllers.LogInPageController import LogInPageController
-from core.controllers.RegisterUserPageController import RegisterUserPageController
-from core.controllers.UserDashboardController import UserDashboardController
+from core.RouteHandlers.ArticleDetailsRouteHandler import ArticleDetailsRouteHandler
+from core.RouteHandlers.ArticleEditorRouteHandler import ArticleEditorRouteHandler
+from core.RouteHandlers.IndexRouteHandler import IndexRouteHandler
+from core.RouteHandlers.LogInRouteHandler import LogInRouteHandler
+from core.RouteHandlers.RegisterUserRouteHandler import RegisterUserRouteHandler
+from core.RouteHandlers.UserDashboardRouteHandler import UserDashboardRouteHandler
 
 urlpatterns = [
-    path("", IndexPageController.GetResponse),
-    path("register/", RegisterUserPageController.GetResponse),
-    path("login/", LogInPageController.GetResponse),
-    path("dashboard/", UserDashboardController.GetResponse),
-    path("articleEditor/", ArticleEditorPageController.GetResponse),
-    path("article/<int:articleId>", ArticleDetailsPageController.GetResponse)
+    path("", IndexRouteHandler.GetResponse),
+    path("register/", RegisterUserRouteHandler.GetResponse),
+    path("login/", LogInRouteHandler.GetResponse),
+    path("dashboard/", UserDashboardRouteHandler.GetResponse),
+    path("articleEditor/", ArticleEditorRouteHandler.GetResponse),
+    path("article/<int:articleId>", ArticleDetailsRouteHandler.GetResponse)
 ]

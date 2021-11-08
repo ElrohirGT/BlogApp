@@ -2,11 +2,11 @@ from django.contrib import messages
 from django.http.response import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
 
-from core.controllers.PackageMethods import EncryptPassword
+from core.RouteHandlers.PackageMethods import EncryptPassword
 from core.forms import RegisterForm
 from core.models import User
 
-class RegisterUserPageController():
+class RegisterUserRouteHandler():
 
     def GetResponse(request):
         if request.method == "POST":

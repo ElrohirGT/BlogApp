@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 from core.models import Article
 
-class UserDashboardController():
+class UserDashboardRouteHandler():
     def GetResponse(request):
         if not request.session.__contains__("UserName"):
             return HttpResponseRedirect("/login")
