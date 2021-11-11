@@ -45,6 +45,9 @@
     color: #888888;
     align-self: center;
 }
+.header{
+    grid-area: header;
+}
 .newArticle{
     grid-area: newArticle;
 }
