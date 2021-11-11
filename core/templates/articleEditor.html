@@ -1,17 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article Editor | Blog App</title>
+{% include "inc/header.html" with Title="Article Editor | Blog App"%}
+{% load static %}
+    <script defer src="{% static 'fontawesome/js/all.js' %}"></script> <!--load all styles -->
+    <link rel="stylesheet" href="{% static 'core/articleEditor.css' %}">
     {{ form.media }}
 </head>
 <body>
     <form action="." method="POST">{% csrf_token %}
-        <h1>Article Editor</h1>
-        {{ form }}
-        <button type="submit">Submit</button>
+        <div class="form-header">
+            <a href="/">
+                <img src="{% static 'core/banner.svg' %}" alt="Company Logo">
+            </a>
+            <button class="primary-button" type="submit"> <i class="fas fa-save"></i> Save</button>
+        </div>
+        <div class="form-contents">
+            <h1>Article Editor</h1>
+            {{ form }}
+        </div>
     </form>
 </body>
 </html>

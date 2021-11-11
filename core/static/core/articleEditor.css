@@ -1,0 +1,23 @@
+form{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 10% 90%;
+    row-gap: 3rem;
+}
+
+.form-header{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.form-header button{
+    padding: 1rem;
+}
+
+.form-contents{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, .25);
+    padding: 1rem 5rem 5rem 5rem;
+}
