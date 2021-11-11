@@ -18,6 +18,11 @@ h1 span {
 h2{
     margin:0;
 }
+form{
+    display: flex;
+    flex-direction: column;
+    row-gap: .2rem;
+}
 
 #banner{
     margin-bottom: 2rem;

@@ -13,7 +13,10 @@
     <form action="." method="POST">{% csrf_token %}
         <h1>Blog App</h1>
         {{ form }}
-        <button type="submit" class="primary-button">Log In</button>
+        <div class="actions-container">
+            <button type="submit" class="primary-button">Log In</button>
+            <a href="/register" class="secondary-button">New Account</a>
+        </div>
         {% if messages %}
         <ul class="messages">
             {% for message in messages %}
