@@ -1,7 +1,10 @@
 *{
     font-family: Montserrat;
 }
-
+body{
+    margin:0;
+    padding: 2.5rem 10rem 2.5rem 10rem;
+}
 h1{
     grid-area: header;
     align-self: center;
@@ -14,6 +17,10 @@ h1 span {
 }
 h2{
     margin:0;
+}
+
+#banner{
+    margin-bottom: 2rem;
 }
 
 a, button{
@@ -29,11 +36,16 @@ a span{
 .primary-button, .secondary-button{
     border-radius: .8rem;
     text-align: center;
+    transition: .4s;
 }
 .primary-button{
     background-color: #00828A;
     color:white;
     font-weight:bold;
+}
+.primary-button:hover, .secondary-button:hover{
+    cursor: pointer;
+    filter: brightness(80%);
 }
 .secondary-button{
     border-style:solid;

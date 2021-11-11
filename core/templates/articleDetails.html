@@ -1,47 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ Article.Title|title }} | Blog App</title>
+    {% include "inc/header.html" with Title=Article.Title %}
     {{ CommentForm.media }}
-</head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/articleDetails.css' %}">
+    <head/>
 <body>
-    <div>
-        <h1>{{ Article.Title | title }}</h1>
-        <b>{{ Article.ReadTime | date:"i" }} minutes to read</b>
-        <div>
+    {% include "inc/banner.html" %}
+    <div class="article-container">
+        <h1 class="article-title">{{ Article.Title | title }}</h1>
+        <p class="article-read-time">{{ Article.ReadTime | date:"i" }} minutes to read</p>
+        <div class="article-body">
             <p>{{ Article.Body.html | safe }}</p>
         </div>
-        <div>
+    </div>
+    <div class="comments-container">
         <h2>Comments</h2>
-        <form method="post">{% csrf_token %}
-            {% for hiddenField in CommentForm.hidden_fields %}
-                {{ hiddenField }}
-            {% endfor %}
-            {% for field in CommentForm.visible_fields %}
-                {{ field }}
-            {% endfor %}
-            <button type="submit">Submit</button>
-
-            {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
-                    {{ message }}
-                </li>
+        {% if IsLoggedIn %}
+            <form method="post" class="comment-form">{% csrf_token %}
+                {% for hiddenField in CommentForm.hidden_fields %}
+                    {{ hiddenField }}
                 {% endfor %}
-            </ul>
-            {% endif %}
-        </form>
+                {% for field in CommentForm.visible_fields %}
+                    {{ field }}
+                {% endfor %}
+                <button type="submit" class="primary-button">Submit</button>
+
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </form>
+        {% endif %}
 
         {% for comment in Comments %}
-            <div>
+            <div class="comment-container">
                 <h3>{{ comment.Author.Name }}</h3>
-                <b>{{ comment.PublishedDate }}</b>
-                {% if comment.PublishedDate.date != comment.LastEditDate.date %} - Last Edit: {{ comment.LastEditDate }} {% endif %}
+                <i>{{ comment.PublishedDate }}</i>
+                {% if comment.PublishedDate.date != comment.LastEditDate.date and comment.PublishedDate.minute != comment.LastEditDate.minute %} - Last Edit: {{ comment.LastEditDate }} {% endif %}
                 <div>{{ comment.Body.html | safe }}</div>
             </div>
         {% endfor %}

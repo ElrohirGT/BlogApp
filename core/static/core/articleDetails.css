@@ -1,0 +1,43 @@
+h3{
+    margin:0;
+}
+.article-container{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px -2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+    padding: 4rem;
+}
+
+.article-read-time{
+    text-align: center;
+}
+.article-body{
+    padding-top: 2rem;
+    grid-area: articleBody;
+    text-align: justify;
+}
+
+.comments-container{
+    margin-top: 3rem;
+    display: flex;
+    row-gap: 1rem;
+    flex-direction: column;
+}
+.comment-form{
+    display: flex;
+    flex-direction: column;
+    row-gap: .5rem;
+}
+.comment-form button[type="submit"]{
+    align-self: flex-end;
+    padding: .8rem;
+    right: 0;
+}
+.comment-container{
+    padding: 1rem 4rem 0 4rem;
+    border-style: solid;
+    border-radius: 1rem;
+    border-color: gray;
+    border-width: thin;
+}
