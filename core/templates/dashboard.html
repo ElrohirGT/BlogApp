@@ -5,19 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Blog App</title>
+    {% load static %}
+    <script defer src="{% static 'fontawesome/js/all.js' %}"></script> <!--load all styles -->
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'core/dashboard.css' %}">
 </head>
-<body>
-    <h1>Welcome to the dashboard {{ UserName }}</h1>
-    <a href="/articleEditor">Create Article</a>
-    <a href="/logout">Log Out</a>
-    <h2>Your blogs</h2>
-    {% for article in UserArticles %}
-        <div>
-            <a href="/article/{{article.pk}}">
-                <b>{{ article.Title|title }}</b>
-                <span>{{ article.ReadTime|date:"i" }} minutes</span>
-            </a>
-        </div>
-    {% endfor %}
+<body class="dashboard-container">
+        <h1>
+            <span>
+                <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M42 0H10C4.47715 0 0 4.47715 0 10V42C0 47.5228 4.47715 52 10 52H42C47.5228 52 52 47.5228 52 42V10C52 4.47715 47.5228 0 42 0Z" fill="#00828A"/>
+                    <path d="M39.2999 12.8036L38.4922 13.6114L37.8184 14.2852L24.3571 27.7465L26.3218 39.0438C26.3389 39.141 26.3783 39.2328 26.4371 39.312C26.4959 39.3913 26.5723 39.4559 26.6603 39.5005C26.7483 39.5451 26.8455 39.5686 26.9442 39.569C27.0429 39.5695 27.1403 39.547 27.2287 39.5033L33.3244 36.443C33.4708 36.3696 33.5821 36.2412 33.6339 36.0858L39.29 14.4092L39.5113 13.7841C39.5715 13.617 39.5833 13.4364 39.5454 13.263C39.5075 13.0895 39.4213 12.9303 39.2969 12.8036" fill="#ADDAD8"/>
+                    <path d="M39.3 12.8028L38.4923 13.6106L37.8185 14.2843L24.3611 27.7457L13.0639 25.7809C12.9667 25.7639 12.8749 25.7244 12.7956 25.6656C12.7163 25.6069 12.6519 25.5305 12.6073 25.4424C12.5627 25.3544 12.5392 25.2572 12.5387 25.1586C12.5382 25.0599 12.5607 24.9624 12.6045 24.874L15.6647 18.7783C15.7381 18.6319 15.8665 18.5206 16.0219 18.4688L37.6984 12.8128L38.3236 12.5915C38.4905 12.5311 38.6711 12.5191 38.8445 12.5569C39.018 12.5946 39.1772 12.6806 39.304 12.8048" fill="white"/>
+                </svg>
+                Interns Blog
+            </span>
+        </h1>
+        <a href="/articleEditor" class="primary-button newArticle">
+            <span>
+                <i class="fas fa-plus"></i> Create
+            </span>
+        </a>
+        <a href="/logout" class="secondary-button logout">
+        <span>
+            <i class="fas fa-sign-out-alt"></i> Log Out
+        </span>
+        </a>
+    <div class="articles main">
+        {% for article in UserArticles %}
+                <a href="/article/{{article.pk}}" class="article-container">
+                    <div class="article-title">
+                        <h2>{{ article.Title|title }}</h2>
+                        <span>{{ article.PublishedDate|date:"d M. Y" }}</span>
+                    </div>
+                    <span class="reading-time"><i class="fas fa-clock"></i> {{ article.ReadTime|date:"i" }} minutes</span>
+                    <span class="commentsCount"> <i class="fas fa-comment-alt"></i> {{ article.CommentsCount }}</span>
+                </a>
+        {% endfor %}
+    </div>
 </body>
 </html>

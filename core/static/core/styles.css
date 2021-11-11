@@ -1,0 +1,41 @@
+*{
+    font-family: Montserrat;
+}
+
+h1{
+    grid-area: header;
+    align-self: center;
+    display: table;
+    margin: 0;
+}
+h1 span {
+    display: table-cell;
+    vertical-align:top;
+}
+h2{
+    margin:0;
+}
+
+a{
+    display:table;
+    text-decoration:none;
+}
+a span{
+    display:table-cell;
+    vertical-align:middle;
+}
+.primary-button, .secondary-button{
+    border-radius: .8rem;
+    text-align: center;
+}
+.primary-button{
+    background-color: #00828A;
+    color:white;
+    font-weight:bold;
+}
+.secondary-button{
+    border-style:solid;
+    border-width: thin;
+    border-color: #00828A;
+    color: #00828A;
+}
