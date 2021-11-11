@@ -5,12 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'core/login.css' %}">
 </head>
 <body>
     <form action="." method="POST">{% csrf_token %}
-        <h1>Log In</h1>
+        <h1>Blog App</h1>
         {{ form }}
-        <button type="submit">Log In</button>
+        <button type="submit" class="primary-button">Log In</button>
         {% if messages %}
         <ul class="messages">
             {% for message in messages %}

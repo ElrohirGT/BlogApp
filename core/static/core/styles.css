@@ -16,9 +16,11 @@ h2{
     margin:0;
 }
 
-a{
+a, button{
     display:table;
     text-decoration:none;
+    background: none;
+    border: none;
 }
 a span{
     display:table-cell;
