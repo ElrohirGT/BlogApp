@@ -10,7 +10,7 @@ WORD_READING_SPEED = 300 #words per minute
 class ArticleEditorRouteHandler():
     def GetResponse(request):
         if not CheckSession(request):
-            return HttpResponseRedirect("/login")
+            return HttpResponseRedirect("/")
         
         userId = request.session["UserId"]
 

@@ -23,7 +23,7 @@ class RegisterUserRouteHandler():
             user.Salt = salt
 
             user.save()
-            return HttpResponseRedirect("/login")
+            return HttpResponseRedirect("/")
         elif request.method=="GET":
             form = RegisterForm()
             return render(request, "register.html", {"form":form})

@@ -7,7 +7,7 @@ from core.models import Article, Comment
 class UserDashboardRouteHandler():
     def GetResponse(request):
         if not CheckSession(request):
-            return HttpResponseRedirect("/login")
+            return HttpResponseRedirect("/")
 
         userId = request.session["UserId"]
         articles = list(Article.objects.filter(Author__id=userId))

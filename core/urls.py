@@ -9,9 +9,8 @@ from core.RouteHandlers.UserDashboardRouteHandler import UserDashboardRouteHandl
 from core.RouteHandlers.LogOutRouteHandler import LogOutRouteHandler
 
 urlpatterns = [
-    path("", IndexRouteHandler.GetResponse),
+    path("", LogInRouteHandler.GetResponse),
     path("register/", RegisterUserRouteHandler.GetResponse),
-    path("login/", LogInRouteHandler.GetResponse),
     path("dashboard/", UserDashboardRouteHandler.GetResponse),
     path("articleEditor/", ArticleEditorRouteHandler.GetResponse),
     path("article/<int:articleId>", ArticleDetailsRouteHandler.GetResponse),
