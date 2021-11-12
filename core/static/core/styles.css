@@ -4,6 +4,7 @@
 body{
     margin:0;
     padding: 2.5rem 10rem 2.5rem 10rem;
+    overflow-x: hidden;
 }
 h1{
     grid-area: header;

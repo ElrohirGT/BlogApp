@@ -47,6 +47,7 @@
 }
 .header{
     grid-area: header;
+    justify-self: start;
 }
 .newArticle{
     grid-area: newArticle;
